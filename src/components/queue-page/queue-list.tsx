@@ -5,7 +5,7 @@ import { ElementStates } from "../../types/element-states";
 
 
 type TProps = {
-  arr: string[] | null [];
+  arr: (string | null)[];
   tail: number;
   head: number;
   isEmpty: boolean;

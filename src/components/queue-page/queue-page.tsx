@@ -34,7 +34,7 @@ export const QueuePage: React.FC = () => {
     clear: false,
   });
   const [disabled, setDisabled] = React.useState<boolean>(false);
-  const [arr, setArr] = React.useState<(string[] | null[])>(defaultArr);
+  const [arr, setArr] = React.useState<(string | null)[]>(defaultArr);
   const [queue, setQueue] = React.useState(new Queue<string>(7));
   const [index, setIndex] = React.useState(-1)
 
