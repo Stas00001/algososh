@@ -14,6 +14,8 @@ interface ILinkedList<T> {
   deleteHead: () => void;
   deleteTail: () => void;
   deleteByIndex: (index: number) => void;
+  returnList: () => T[]
+  getSize: () => number
 }
 
 class LinkedList<T> implements ILinkedList<T> {
@@ -31,7 +33,7 @@ class LinkedList<T> implements ILinkedList<T> {
     }
   }
 
-  insertAt(element: T, index: number ) {
+  insertAt(element: T, index: number) {
     if (index < 0 || index > this.size) {
       console.log("Enter a valid index");
       return;
@@ -42,16 +44,16 @@ class LinkedList<T> implements ILinkedList<T> {
         node.next = this.head;
         this.head = node;
       } else {
-        let curr: any = this.head;
-        let currIndex = 0;
-        let prev: any = null;
+        let curr: Node<T> | null = this.head;
+        let currIndex: number = 0;
+        let prev: Node<T> | null = null;
 
         while (currIndex < index) {
           prev = curr;
-          curr = curr.next;
+          curr = curr!.next;
           currIndex++;
         }
-        prev.next = node;
+        prev!.next = node;
         node.next = curr;
       }
 
@@ -59,7 +61,7 @@ class LinkedList<T> implements ILinkedList<T> {
     }
   }
   deleteByIndex = (index: number) => {
-    let curr = this.head;
+    let curr: Node<T> | null = this.head;
     let previous = curr;
     if (previous && curr) {
       if (curr === this.head) {
@@ -75,7 +77,7 @@ class LinkedList<T> implements ILinkedList<T> {
   };
 
   append(element: T) {
-    const node = new Node(element);
+    const node: Node<T> | null = new Node(element);
     if (!this.head || !this.tail) {
       this.head = node;
       this.tail = node;
@@ -101,7 +103,7 @@ class LinkedList<T> implements ILinkedList<T> {
     if (!this.head) {
       return null;
     }
-    const node = this.head;
+    const node: Node<T> | null = this.head;
     if (this.head.next) {
       this.head = this.head.next;
     } else {
@@ -122,7 +124,7 @@ class LinkedList<T> implements ILinkedList<T> {
       this.tail = null;
       return node;
     }
-    let curr = this.head;
+    let curr : Node<T> | null = this.head;
     while (curr?.next) {
       if (!curr?.next.next) {
         this.tail = curr;
@@ -134,7 +136,7 @@ class LinkedList<T> implements ILinkedList<T> {
     this.size--;
   };
   returnList = () => {
-    let curr = this.head;
+    let curr : Node<T> | null = this.head;
     let res: T[] = [];
     while (curr) {
       res.push(curr.value);

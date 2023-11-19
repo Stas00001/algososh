@@ -5,7 +5,7 @@ interface IQueue<T> {
 }
 
 class Queue<T> implements IQueue<T> {
-  private container: any = [];
+  private container: (T | null)[] = [];
   private head = 0;
   private tail = 0;
   private readonly size: number = 0;

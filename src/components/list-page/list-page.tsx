@@ -40,9 +40,6 @@ export const ListPage: React.FC = () => {
     deleteByIndex: false,
   });
   const list = React.useMemo(() => new LinkedList(randomArr), []);
-
-
-  console.log(list);
   const [arr, setArr] = React.useState(list.returnList());
   const [circleIndex, setCircleIndex] = React.useState(-1);
   const [currentElement, setCurrentElement] = React.useState("");
@@ -135,10 +132,10 @@ export const ListPage: React.FC = () => {
     await delay(SHORT_DELAY_IN_MS);
     setTypeElementStates({ ...typeElementStates, modifiedIndex: -1 });
     setArr(list.returnList());
-    values.val = ""
-    values.valIndex = ''
+    values.val = "";
+    values.valIndex = "";
     setLoader({ ...loader, addByIndex: false });
-  }
+  };
   const deleteButtonIndex = async () => {
     setLoader({ ...loader, deleteByIndex: true });
     let index = Number(values.valIndex);
@@ -160,7 +157,7 @@ export const ListPage: React.FC = () => {
     setCircleIndex(-1);
     list.deleteByIndex(index);
     setArr(list.returnList());
-    values.valIndex = ''
+    values.valIndex = "";
     setLoader({ ...loader, deleteByIndex: false });
   };
   const showHead = (index: number) => {
@@ -170,7 +167,6 @@ export const ListPage: React.FC = () => {
       "head"
     ) : undefined;
   };
-  
 
   const showTail = (index: number) => {
     return circleIndex === index && circleLocation === Location.bottom ? (
@@ -192,11 +188,13 @@ export const ListPage: React.FC = () => {
     }
     return ElementStates.Default;
   };
-  console.log(arr);
+  const onChangeForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
   return (
     <SolutionLayout title="Связный список">
       <div className={style.container}>
-        <form className={style.form}>
+        <form onSubmit={onChangeForm} className={style.form}>
           <Input
             maxLength={4}
             isLimitText={true}
@@ -242,7 +240,7 @@ export const ListPage: React.FC = () => {
             disabled={arr.length === 0}
           ></Button>
         </form>
-        <form className={style.form}>
+        <form onSubmit={onChangeForm} className={style.form}>
           <Input
             isLimitText={false}
             name="valIndex"
@@ -258,16 +256,25 @@ export const ListPage: React.FC = () => {
             text="Добавить по индексу"
             isLoader={loader.addByIndex}
             extraClass={style.button}
-            onClick={() => {addButtonIndex()}}
-            disabled={!values.val || !values.valIndex || Number(values.valIndex) > arr.length - 1}
-
+            onClick={() => {
+              addButtonIndex();
+            }}
+            disabled={
+              !values.val ||
+              !values.valIndex ||
+              Number(values.valIndex) > arr.length - 1
+            }
           ></Button>
           <Button
             type={"button"}
             text="Удалить по индексу"
             isLoader={loader.deleteByIndex}
-            onClick={() => {deleteButtonIndex()}}
-            disabled={!values.valIndex || Number(values.valIndex) > arr.length - 1}
+            onClick={() => {
+              deleteButtonIndex();
+            }}
+            disabled={
+              !values.valIndex || Number(values.valIndex) > arr.length - 1
+            }
             extraClass={style.button}
           ></Button>
         </form>

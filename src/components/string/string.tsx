@@ -63,7 +63,7 @@ export const StringComponent: React.FC = () => {
             type={"submit"}
             text="Развернуть"
             isLoader={loader}
-            disabled={!values}
+            disabled={!values.string}
           ></Button>
         </form>
         <StringList
