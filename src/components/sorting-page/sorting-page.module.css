@@ -1,0 +1,36 @@
+.container {
+    max-width: calc(100% - 260px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.container-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.fieldset {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 12px;
+    max-height: 300px;
+    align-items: end;
+}

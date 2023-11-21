@@ -1,0 +1,35 @@
+.container {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.form {
+    width: 80%;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 48px;
+}
+
+.fieldset {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    border: none;
+    padding-right: 80px;
+
+}
+
+.list {
+    display: flex;
+    list-style: none;
+    gap: 48px 16px;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+}
