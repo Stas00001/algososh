@@ -36,17 +36,17 @@ export const QueuePage: React.FC = () => {
   const [disabled, setDisabled] = React.useState<boolean>(false);
   const [arr, setArr] = React.useState<(string | null)[]>(defaultArr);
   const [queue, setQueue] = React.useState(new Queue<string>(7));
-  const [index, setIndex] = React.useState(-1)
-
+  const [index, setIndex] = React.useState(-1);
+  console.log(queue)
   const addButton = async () => {
     setLoader({ ...loader, add: true });
     setDisabled(true);
-    setIndex(queue.getTail())
-    queue.enqueue(values.num)
-    setArr([...queue.getContainer()])
-    await delay(SHORT_DELAY_IN_MS)
-    values.num = ""
-    setIndex(-1)
+    setIndex(queue.getTail());
+    queue.enqueue(values.num);
+    setArr([...queue.getContainer()]);
+    await delay(SHORT_DELAY_IN_MS);
+    values.num = "";
+    setIndex(-1);
     setLoader({ ...loader, add: false });
     setDisabled(false);
   };
@@ -54,11 +54,11 @@ export const QueuePage: React.FC = () => {
   const deleteButton = async () => {
     setLoader({ ...loader, delete: true });
     setDisabled(true);
-    setIndex(queue.getHead())
-    await delay(SHORT_DELAY_IN_MS)
-    queue.dequeue()
-    setArr([...queue.getContainer()])
-    setIndex(-1)
+    setIndex(queue.getHead());
+    await delay(SHORT_DELAY_IN_MS);
+    queue.dequeue();
+    setArr([...queue.getContainer()]);
+    setIndex(-1);
     setLoader({ ...loader, delete: false });
     setDisabled(false);
   };
@@ -66,13 +66,12 @@ export const QueuePage: React.FC = () => {
   const clearButton = () => {
     setLoader({ ...loader, clear: true });
     setDisabled(true);
-    queue.clear()
-    setArr(defaultArr)
+    queue.clear();
+    setArr(defaultArr);
     setLoader({ ...loader, clear: false });
     setDisabled(false);
+  };
 
-  }
-  
   return (
     <SolutionLayout title="Очередь">
       <div className={style.container}>
@@ -91,14 +90,14 @@ export const QueuePage: React.FC = () => {
               text="Добавить"
               onClick={addButton}
               isLoader={loader.add}
-              disabled={!values.num || disabled || queue.getSize() === 7 }
+              disabled={!values.num || disabled || queue.getSize() === 7}
             ></Button>
             <Button
               type={"submit"}
               text="Удалить"
               onClick={deleteButton}
               isLoader={loader.delete}
-              disabled={!values || queue.isEmpty() || disabled || queue.isEmpty()}
+              disabled={disabled || queue.isEmpty()}
             ></Button>
           </fieldset>
           <Button
@@ -106,10 +105,16 @@ export const QueuePage: React.FC = () => {
             text="Очистить"
             onClick={clearButton}
             isLoader={loader.clear}
-            disabled={!values || !arr.length || disabled || queue.isEmpty()}
+            disabled={!arr.length || disabled || queue.isEmpty()}
           ></Button>
         </div>
-        <QueueList arr={arr} tail={queue.getTail() - 1} head={queue.getHead()} isEmpty ={!queue.isEmpty()} element={index}/>
+        <QueueList
+          arr={arr}
+          tail={queue.getTail() - 1}
+          head={queue.getHead()}
+          isEmpty={!queue.isEmpty()}
+          element={index}
+        />
       </div>
     </SolutionLayout>
   );

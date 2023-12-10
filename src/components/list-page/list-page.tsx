@@ -31,6 +31,7 @@ enum Location {
 }
 export const ListPage: React.FC = () => {
   const { values, onChange } = useFormField<FormStateType>(initialFormState);
+  const [disabled, setDisabled] = React.useState(false)
   const [loader, setLoader] = React.useState({
     addHead: false,
     deleteHead: false,
@@ -68,6 +69,7 @@ export const ListPage: React.FC = () => {
 
   const deleteButtonHead = async () => {
     setLoader({ ...loader, deleteHead: true });
+    setDisabled(true)
     setCurrentElement(arr[0]);
     setCircleLocation(Location.bottom);
     setCircleIndex(0);
@@ -76,14 +78,16 @@ export const ListPage: React.FC = () => {
     list.deleteHead();
     setCircleIndex(-1);
     setArr(list.returnList());
-
     setLoader({ ...loader, deleteHead: false });
+    setDisabled(false)
+
   };
   const addButtonTail = async () => {
     setLoader({ ...loader, addTail: true });
+    setDisabled(true)
     setCurrentElement(values.val);
     setCircleLocation(Location.top);
-    setCircleIndex(list.getSize());
+    setCircleIndex(list.getSize()-1);
     await delay(SHORT_DELAY_IN_MS);
     list.append(values.val);
     setTypeElementStates({ ...typeElementStates, modifiedIndex: arr.length });
@@ -93,6 +97,8 @@ export const ListPage: React.FC = () => {
     setTypeElementStates({ ...typeElementStates, modifiedIndex: -1 });
     values.val = "";
     setLoader({ ...loader, addTail: false });
+    setDisabled(false)
+
   };
   const deleteButtonTail = async () => {
     setLoader({ ...loader, deleteTail: true });
@@ -202,6 +208,7 @@ export const ListPage: React.FC = () => {
             value={values.val}
             onChange={onChange}
             extraClass={style.input}
+            data-test ='inputVal'
           ></Input>
           <Button
             type={"button"}
@@ -211,6 +218,7 @@ export const ListPage: React.FC = () => {
             }}
             isLoader={loader.addHead}
             disabled={!values.val}
+            data-test="buttonAddHead"
           ></Button>
           <Button
             type={"button"}
@@ -220,6 +228,7 @@ export const ListPage: React.FC = () => {
             }}
             isLoader={loader.addTail}
             disabled={!values.val}
+            data-test="buttonAddTail"
           ></Button>
           <Button
             type={"button"}
@@ -228,7 +237,8 @@ export const ListPage: React.FC = () => {
               deleteButtonHead();
             }}
             isLoader={loader.deleteHead}
-            disabled={arr.length === 0}
+            disabled={arr.length === 0 || disabled }
+            data-test="buttonDelHead"
           ></Button>
           <Button
             type={"button"}
@@ -237,7 +247,8 @@ export const ListPage: React.FC = () => {
               deleteButtonTail();
             }}
             isLoader={loader.deleteTail}
-            disabled={arr.length === 0}
+            disabled={arr.length === 0 || disabled}
+            data-test="buttonDelTail"
           ></Button>
         </form>
         <form onSubmit={onChangeForm} className={style.form}>
@@ -250,6 +261,7 @@ export const ListPage: React.FC = () => {
             type="number"
             min="0"
             max={arr.length - 1}
+            data-test = 'inputValIndex'
           ></Input>
           <Button
             type={"button"}
@@ -264,6 +276,7 @@ export const ListPage: React.FC = () => {
               !values.valIndex ||
               Number(values.valIndex) > arr.length - 1
             }
+            data-test="buttonAddIndex"
           ></Button>
           <Button
             type={"button"}
@@ -276,6 +289,7 @@ export const ListPage: React.FC = () => {
               !values.valIndex || Number(values.valIndex) > arr.length - 1
             }
             extraClass={style.button}
+            data-test="buttonDelIndex"
           ></Button>
         </form>
         <ul className={style.list}>

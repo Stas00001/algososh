@@ -1,0 +1,13 @@
+{
+    "plugins": [
+      "cypress",
+      "eslint-plugin-no-cyrillic-string"
+
+    ],
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "plugin:cypress/recommended"
+    ],
+    
+  }
