@@ -1,5 +1,4 @@
 import {
-  testUrl,
   buttonAddHead,
   buttonAddIndex,
   buttonDelHead,
@@ -22,7 +21,7 @@ import { SHORT_DELAY_IN_MS } from "../../src/constants/delays";
 
 describe("list page display correctly", () => {
   beforeEach(() => {
-    cy.visit(`${testUrl}/list`);
+    cy.visit(`list`);
   });
 
   it("should button disabled if input is empty", () => {

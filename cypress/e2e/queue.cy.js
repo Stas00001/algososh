@@ -1,5 +1,4 @@
 import {
-  testUrl,
   circle,
   modifiedState,
   defaultState,
@@ -10,7 +9,7 @@ import {
 import { SHORT_DELAY_IN_MS } from "../../src/constants/delays";
 describe("stack page display correctly", () => {
   beforeEach(() => {
-    cy.visit(`${testUrl}/queue`);
+    cy.visit(`queue`);
     cy.get("button").contains("Добавить").as("buttonAdd");
     cy.get("button").contains("Удалить").as("buttonDel");
     cy.get("button").contains("Очистить").as("buttonClear");

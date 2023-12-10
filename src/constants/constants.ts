@@ -1,4 +1,3 @@
-export const testUrl = "http://localhost:3000";
 export const circle = 'div[class*="circle_circle"]';
 export const head = '[class*="circle_head"]';
 export const tail = 'div[class*="circle_tail"]';

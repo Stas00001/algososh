@@ -1,9 +1,9 @@
-import { testUrl, circle } from "../../src/constants/constants";
+import {circle } from "../../src/constants/constants";
 
 const resultFibonacci = [1,1,1,2,5]
 describe('fibonacci page display correctly', () => {
     beforeEach(() => {
-        cy.visit(`${testUrl}/fibonacci`);
+        cy.visit(`fibonacci`);
       });
       it('should button disabled if input is empty', () => {
         cy.get("input").should("be.empty");

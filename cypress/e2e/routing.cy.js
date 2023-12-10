@@ -1,8 +1,7 @@
-import { testUrl } from "../../src/constants/constants";
 
 describe('checking routing operation', () => {
     beforeEach(() => {
-        cy.visit(`${testUrl}`);
+        cy.visit(`/`);
     })
     it('opening a page with recursion(string)',()=>{
         cy.get('a[href*="/recursion"]').click();

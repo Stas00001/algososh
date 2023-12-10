@@ -1,4 +1,4 @@
-import { testUrl, circle } from "../../src/constants/constants";
+import { circle } from "../../src/constants/constants";
 import { DELAY_IN_MS } from "../../src/constants/delays";
 const state = [
   [
@@ -28,14 +28,15 @@ const str = [
 ];
 describe("string page display correctly", () => {
   beforeEach(() => {
-    cy.visit(`${testUrl}/recursion`);
+    cy.visit("recursion");
   });
   it("should button disabled if input is empty", () => {
     cy.get("input").should("be.empty");
     cy.get("button").should("be.disabled");
   });
   it("string should reverse correctly", () => {
-    cy.get("input").type("1234").should("have.value", "1234");
+    cy.get("input").type("1234");
+    cy.get("input").should("have.value", "1234");
     cy.get("button[type='submit']").click();
     cy.get(circle).each(($el, index) => {
       cy.wrap($el)
